@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
 import { ToastProvider } from './components/Common/Toast'
+import Watermark from './components/Common/Watermark'
 import Layout from './components/Layout/Layout'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
@@ -15,18 +16,21 @@ export default function App() {
     <BrowserRouter>
       <AuthProvider>
         <ToastProvider>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route element={<Layout />}>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/cases" element={<Cases />} />
-              <Route path="/cases/:caseId" element={<CaseDetail />} />
-              <Route path="/invoices" element={<Invoices />} />
-              <Route path="/deadlines" element={<Deadlines />} />
-            </Route>
-            <Route path="*" element={<Navigate to="/dashboard" replace />} />
-          </Routes>
+          <div className="pb-10">
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route element={<Layout />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/cases" element={<Cases />} />
+                <Route path="/cases/:caseId" element={<CaseDetail />} />
+                <Route path="/invoices" element={<Invoices />} />
+                <Route path="/deadlines" element={<Deadlines />} />
+              </Route>
+              <Route path="*" element={<Navigate to="/dashboard" replace />} />
+            </Routes>
+          </div>
+          <Watermark />
         </ToastProvider>
       </AuthProvider>
     </BrowserRouter>
