@@ -33,7 +33,12 @@ async function fetchAllPages(table, params = {}) {
 }
 
 export async function fetchCases() {
-  return fetchAllPages('Cases', { sort: '[{field:"Created Date",direction:"desc"}]' })
+  const records = await fetchAllPages('Cases')
+  return records.sort((a, b) => {
+    const da = new Date(a.fields['Created Date'] || 0)
+    const db = new Date(b.fields['Created Date'] || 0)
+    return db - da
+  })
 }
 
 export async function fetchCaseById(caseId) {
@@ -51,7 +56,12 @@ export async function fetchDocumentsByCaseId(caseId) {
 }
 
 export async function fetchInvoices() {
-  return fetchAllPages('Invoices', { sort: '[{field:"Date Sent",direction:"desc"}]' })
+  const records = await fetchAllPages('Invoices')
+  return records.sort((a, b) => {
+    const da = new Date(a.fields['Date Sent'] || 0)
+    const db = new Date(b.fields['Date Sent'] || 0)
+    return db - da
+  })
 }
 
 export async function fetchInvoicesByCaseId(caseId) {
@@ -67,17 +77,17 @@ export async function fetchDeadlines() {
 }
 
 export async function fetchCommunicationsByCaseId(caseId) {
-  return fetchAllPages('Communication Log', {
+  const records = await fetchAllPages('Communication Log', {
     filterByFormula: `{Case ID}="${caseId}"`,
-    sort: '[{field:"Date",direction:"desc"}]',
   })
+  return records.sort((a, b) => new Date(b.fields['Date'] || 0) - new Date(a.fields['Date'] || 0))
 }
 
 export async function fetchRecentCommunications(limit = 5) {
-  return fetchTable('Communication Log', {
-    sort: '[{field:"Date",direction:"desc"}]',
-    maxRecords: limit,
-  })
+  const records = await fetchAllPages('Communication Log')
+  return records
+    .sort((a, b) => new Date(b.fields['Date'] || 0) - new Date(a.fields['Date'] || 0))
+    .slice(0, limit)
 }
 
 export async function fetchClients() {

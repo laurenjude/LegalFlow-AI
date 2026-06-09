@@ -4,6 +4,8 @@ import Badge from '../components/Common/Badge'
 import DocumentsTable from '../components/Documents/DocumentsTable'
 import InvoicesTable from '../components/Invoices/InvoicesTable'
 import UpdateStatusModal from '../components/Cases/UpdateStatusModal'
+import NewDeadlineModal from '../components/Deadlines/NewDeadlineModal'
+import LogCommunicationModal from '../components/Communications/LogCommunicationModal'
 import LoadingSkeleton from '../components/Common/LoadingSkeleton'
 import {
   fetchCaseById,
@@ -26,6 +28,8 @@ export default function CaseDetail() {
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState('Documents')
   const [showStatusModal, setShowStatusModal] = useState(false)
+  const [showDeadlineModal, setShowDeadlineModal] = useState(false)
+  const [showCommModal, setShowCommModal] = useState(false)
 
   const load = async () => {
     setLoading(true)
@@ -131,6 +135,14 @@ export default function CaseDetail() {
 
       {activeTab === 'Communications' && (
         <div className="space-y-3">
+          <div className="flex justify-end">
+            <button
+              onClick={() => setShowCommModal(true)}
+              className="px-4 py-2 bg-[#C9A961] hover:bg-[#b8963f] text-white text-sm font-semibold rounded-lg transition-colors"
+            >
+              + Log Communication
+            </button>
+          </div>
           {comms.length === 0 ? (
             <p className="text-[#666666] text-sm py-4">No communications logged.</p>
           ) : comms.map(r => {
@@ -162,6 +174,15 @@ export default function CaseDetail() {
       )}
 
       {activeTab === 'Deadlines' && (
+        <div>
+          <div className="flex justify-end mb-3">
+            <button
+              onClick={() => setShowDeadlineModal(true)}
+              className="px-4 py-2 bg-[#C9A961] hover:bg-[#b8963f] text-white text-sm font-semibold rounded-lg transition-colors"
+            >
+              + New Deadline
+            </button>
+          </div>
         <div className="bg-white rounded-xl shadow-sm overflow-hidden">
           <table className="w-full text-sm">
             <thead>
@@ -192,9 +213,12 @@ export default function CaseDetail() {
             </tbody>
           </table>
         </div>
+        </div>
       )}
 
       <UpdateStatusModal isOpen={showStatusModal} onClose={() => setShowStatusModal(false)} caseData={caseData} onSuccess={load} />
+      <NewDeadlineModal isOpen={showDeadlineModal} onClose={() => setShowDeadlineModal(false)} caseId={f['Case ID']} onSuccess={load} />
+      <LogCommunicationModal isOpen={showCommModal} onClose={() => setShowCommModal(false)} caseId={f['Case ID']} onSuccess={load} />
     </div>
   )
 }
