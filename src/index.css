@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    @apply text-[#1A1A1A];
+    margin: 0;
+  }
+  #root {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    text-align: left;
+    border: none;
+  }
+}
+
+@layer components {
+  .input-field {
+    @apply w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-[#1A1A1A] text-sm
+      focus:outline-none focus:ring-2 focus:ring-[#0F4C3A] focus:border-transparent
+      placeholder:text-gray-400 transition-colors;
+  }
+}
