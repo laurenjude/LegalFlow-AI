@@ -8,7 +8,7 @@ const navItems = [
   { to: '/deadlines', label: 'Deadlines', icon: '📅' },
 ]
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, onClose }) {
   const { user, signOut } = useAuth()
   const navigate = useNavigate()
 
@@ -18,10 +18,17 @@ export default function Sidebar() {
   }
 
   return (
-    <aside className="fixed top-0 left-0 h-full w-60 bg-[#0F4C3A] flex flex-col z-40">
+    <aside
+      className={`
+        fixed top-0 left-0 h-full w-60 bg-[#0F4C3A] flex flex-col z-[55]
+        transform transition-transform duration-300 ease-in-out
+        ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+        md:translate-x-0
+      `}
+    >
       <div className="px-6 py-6 border-b border-white/10">
         <h1 className="text-[#C9A961] text-xl font-bold tracking-wide">LegalFlow AI</h1>
-        <p className="text-cream/60 text-xs mt-0.5 text-[#F5F0E6]/60">Case Management</p>
+        <p className="text-[#F5F0E6]/60 text-xs mt-0.5">Case Management</p>
       </div>
 
       <nav className="flex-1 py-4 overflow-y-auto">
@@ -29,6 +36,7 @@ export default function Sidebar() {
           <NavLink
             key={to}
             to={to}
+            onClick={onClose}
             className={({ isActive }) =>
               `flex items-center gap-3 px-6 py-3 text-sm font-medium transition-all duration-150 ${
                 isActive

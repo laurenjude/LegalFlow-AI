@@ -70,12 +70,12 @@ export default function SignUp() {
   return (
     <div className="min-h-screen bg-[#0F4C3A] flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-[#C9A961] mb-2">LegalFlow AI</h1>
+        <div className="text-center mb-6 md:mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-[#C9A961] mb-2">LegalFlow AI</h1>
           <p className="text-[#F5F0E6]/70 text-sm">Case Management System</p>
         </div>
 
-        <div className="bg-[#F5F0E6] rounded-2xl p-8 shadow-2xl">
+        <div className="bg-[#F5F0E6] rounded-2xl p-5 md:p-8 shadow-2xl">
           <h2 className="text-xl font-semibold text-[#1A1A1A] mb-6">Create Account</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>

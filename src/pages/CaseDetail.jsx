@@ -79,10 +79,10 @@ export default function CaseDetail() {
       <Link to="/cases" className="text-sm text-[#666666] hover:text-[#0F4C3A] mb-4 inline-block">← Back to Cases</Link>
 
       {/* Header */}
-      <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
+      <div className="flex flex-wrap items-start justify-between gap-3 mb-5 pl-10 md:pl-0">
         <div>
-          <div className="flex items-center gap-3 flex-wrap mb-1">
-            <h1 className="text-2xl font-bold text-[#1A1A1A]">{f['Case ID']}</h1>
+          <div className="flex items-center gap-2 flex-wrap mb-1">
+            <h1 className="text-lg md:text-2xl font-bold text-[#1A1A1A]">{f['Case ID']}</h1>
             <Badge type="status" value={f['Status']} />
             <Badge type="urgency" value={f['Urgency']} />
           </div>
@@ -184,12 +184,13 @@ export default function CaseDetail() {
             </button>
           </div>
         <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+          <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-[#0F4C3A] text-white">
                 <th className="text-left px-4 py-3 font-medium text-xs uppercase tracking-wider">Deadline</th>
                 <th className="text-left px-4 py-3 font-medium text-xs uppercase tracking-wider">Due Date</th>
-                <th className="text-left px-4 py-3 font-medium text-xs uppercase tracking-wider">Days Remaining</th>
+                <th className="text-left px-4 py-3 font-medium text-xs uppercase tracking-wider hidden sm:table-cell">Days Remaining</th>
                 <th className="text-left px-4 py-3 font-medium text-xs uppercase tracking-wider">Status</th>
               </tr>
             </thead>
@@ -203,15 +204,16 @@ export default function CaseDetail() {
                 const daysColor = days === null ? 'text-[#666666]' : days < 0 ? 'text-[#CC0000] font-semibold' : days <= 3 ? 'text-[#CC0000]' : days <= 7 ? 'text-[#CC6600]' : 'text-[#0F4C3A]'
                 return (
                   <tr key={r.id} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                    <td className="px-4 py-3 text-[#1A1A1A] font-medium">{df['Deadline']}</td>
-                    <td className="px-4 py-3 text-[#666666]">{formatDate(df['Due Date'])}</td>
-                    <td className={`px-4 py-3 ${daysColor}`}>{daysText}</td>
+                    <td className="px-4 py-3 text-[#1A1A1A] font-medium text-xs md:text-sm">{df['Deadline']}</td>
+                    <td className="px-4 py-3 text-[#666666] text-xs md:text-sm whitespace-nowrap">{formatDate(df['Due Date'])}</td>
+                    <td className={`px-4 py-3 text-xs md:text-sm hidden sm:table-cell ${daysColor}`}>{daysText}</td>
                     <td className="px-4 py-3"><Badge type="deadlineStatus" value={df['Status']} /></td>
                   </tr>
                 )
               })}
             </tbody>
           </table>
+          </div>
         </div>
         </div>
       )}
