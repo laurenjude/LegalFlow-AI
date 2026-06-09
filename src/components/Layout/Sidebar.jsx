@@ -26,9 +26,21 @@ export default function Sidebar({ isOpen, onClose }) {
         md:translate-x-0
       `}
     >
-      <div className="px-6 py-6 border-b border-white/10">
-        <h1 className="text-[#C9A961] text-xl font-bold tracking-wide">LegalFlow AI</h1>
-        <p className="text-[#F5F0E6]/60 text-xs mt-0.5">Case Management</p>
+      {/* Header — X close button on mobile */}
+      <div className="px-6 py-5 border-b border-white/10 flex items-center justify-between">
+        <div>
+          <h1 className="text-[#C9A961] text-xl font-bold tracking-wide">LegalFlow AI</h1>
+          <p className="text-[#F5F0E6]/60 text-xs mt-0.5">Case Management</p>
+        </div>
+        <button
+          onClick={onClose}
+          className="md:hidden text-[#F5F0E6]/60 hover:text-white transition-colors p-1 -mr-1"
+          aria-label="Close menu"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
       </div>
 
       <nav className="flex-1 py-4 overflow-y-auto">

@@ -76,10 +76,10 @@ export default function CaseDetail() {
   return (
     <div>
       {/* Breadcrumb */}
-      <Link to="/cases" className="text-sm text-[#666666] hover:text-[#0F4C3A] mb-4 inline-block">← Back to Cases</Link>
+      <Link to="/cases" className="text-sm text-[#666666] hover:text-[#0F4C3A] mb-4 pl-14 md:pl-0 block">← Back to Cases</Link>
 
       {/* Header */}
-      <div className="flex flex-wrap items-start justify-between gap-3 mb-5 pl-10 md:pl-0">
+      <div className="flex flex-wrap items-start justify-between gap-3 mb-5 pl-14 md:pl-0">
         <div>
           <div className="flex items-center gap-2 flex-wrap mb-1">
             <h1 className="text-lg md:text-2xl font-bold text-[#1A1A1A]">{f['Case ID']}</h1>

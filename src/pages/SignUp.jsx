@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { useToast } from '../components/Common/Toast'
@@ -49,6 +49,14 @@ export default function SignUp() {
   const { signUp } = useAuth()
   const navigate = useNavigate()
   const showToast = useToast()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    const viewport = document.querySelector('meta[name=viewport]')
+    if (viewport) {
+      viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0')
+    }
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()

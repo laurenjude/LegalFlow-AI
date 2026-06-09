@@ -3,16 +3,6 @@ import { Navigate, Outlet } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 import Sidebar from './Sidebar'
 
-function HamburgerIcon() {
-  return (
-    <div className="flex flex-col gap-[5px]">
-      <span className="block w-5 h-[2px] bg-white rounded-full" />
-      <span className="block w-5 h-[2px] bg-white rounded-full" />
-      <span className="block w-5 h-[2px] bg-white rounded-full" />
-    </div>
-  )
-}
-
 export default function Layout() {
   const { user, loading } = useAuth()
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -29,14 +19,20 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen bg-[#F5F0E6]">
-      {/* Hamburger button — mobile only */}
-      <button
-        onClick={() => setSidebarOpen(true)}
-        className="fixed top-3 left-3 z-[60] p-2 bg-[#0F4C3A] rounded-lg md:hidden"
-        aria-label="Open menu"
-      >
-        <HamburgerIcon />
-      </button>
+      {/* Hamburger — mobile only, hidden when sidebar is open */}
+      {!sidebarOpen && (
+        <button
+          onClick={() => setSidebarOpen(true)}
+          className="fixed top-3 left-3 z-[60] p-2 bg-[#0F4C3A] rounded-lg md:hidden"
+          aria-label="Open menu"
+        >
+          <div className="flex flex-col gap-[5px]">
+            <span className="block w-5 h-[2px] bg-white rounded-full" />
+            <span className="block w-5 h-[2px] bg-white rounded-full" />
+            <span className="block w-5 h-[2px] bg-white rounded-full" />
+          </div>
+        </button>
+      )}
 
       {/* Overlay — mobile only, when sidebar open */}
       {sidebarOpen && (
